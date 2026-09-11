@@ -13,7 +13,10 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/tasks")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://todo-app-rouge-one-18.vercel.app"
+})
 public class TaskController {
 
     private ArrayList<Task> tasks = new ArrayList<>();
