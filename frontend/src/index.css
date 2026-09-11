@@ -1,0 +1,904 @@
+:root {
+  --bg-base: #ffffff;
+  --bg-alt: #f5f7fe;
+
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-solid: #ffffff;
+  --surface-alt: rgba(255, 255, 255, 0.55);
+  --border: rgba(99, 91, 255, 0.14);
+  --border-strong: rgba(99, 91, 255, 0.26);
+
+  --text-primary: #1f2140;
+  --text-muted: #6b6e93;
+  --text-faint: #9497b8;
+
+  --blue: #3b82f6;
+  --royal: #6366f1;
+  --violet: #8b5cf6;
+  --pink: #ec4899;
+  --lavender: #a78bfa;
+
+  --success: #22c08a;
+  --success-bg: rgba(34, 192, 138, 0.1);
+  --danger: #ef4a72;
+  --danger-bg: rgba(239, 74, 114, 0.1);
+
+  --radius-lg: 26px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+  --shadow-sm: 0 2px 10px rgba(76, 70, 160, 0.08);
+  --shadow-md: 0 14px 34px -10px rgba(76, 70, 160, 0.22);
+  --shadow-lg: 0 30px 80px -20px rgba(76, 70, 160, 0.3);
+  --shadow-glow: 0 0 0 1px rgba(139, 92, 246, 0.14), 0 10px 26px -6px rgba(99, 102, 241, 0.4);
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(ellipse 820px 560px at 6% -8%, rgba(99, 102, 241, 0.11), transparent 60%),
+    radial-gradient(ellipse 700px 520px at 102% 4%, rgba(236, 72, 153, 0.1), transparent 55%),
+    radial-gradient(ellipse 760px 560px at 46% 112%, rgba(139, 92, 246, 0.1), transparent 60%),
+    linear-gradient(160deg, var(--bg-base) 0%, var(--bg-alt) 55%, #eef1fc 100%);
+  background-attachment: fixed;
+}
+
+.app-container {
+  max-width: 660px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 20px 84px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ================= FLOATING BACKGROUND WORDS ================= *
+ * Built entirely with ::before/::after on existing elements —    *
+ * no JSX required. Fixed-positioned, decorative, non-interactive. */
+
+@keyframes float-a {
+  0%, 100% { transform: translate(0, 0) rotate(-6deg); }
+  50% { transform: translate(12px, -18px) rotate(-3deg); }
+}
+@keyframes float-b {
+  0%, 100% { transform: translate(0, 0) rotate(5deg); }
+  50% { transform: translate(-16px, 14px) rotate(8deg); }
+}
+@keyframes float-c {
+  0%, 100% { transform: translate(0, 0) rotate(-3deg); }
+  50% { transform: translate(14px, 16px) rotate(-7deg); }
+}
+@keyframes float-d {
+  0%, 100% { transform: translate(0, 0) rotate(4deg); }
+  50% { transform: translate(-12px, -16px) rotate(1deg); }
+}
+@keyframes float-e {
+  0%, 100% { transform: translate(0, 0) rotate(2deg); }
+  50% { transform: translate(18px, 8px) rotate(-4deg); }
+}
+@keyframes float-f {
+  0%, 100% { transform: translate(0, 0) rotate(-4deg); }
+  50% { transform: translate(-10px, 18px) rotate(3deg); }
+}
+
+body::before,
+body::after,
+.app-container::before,
+.app-container::after,
+.app-header::before,
+.app-header::after,
+.app-main::after,
+.task-form::before,
+.task-form::after,
+.task-list::before,
+.task-list::after,
+.empty-state::after,
+.subtitle::after {
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* corner / edge words */
+body::before {
+  content: "TO DO";
+  top: 6%;
+  left: 3%;
+  font-size: 2.6rem;
+  color: var(--blue);
+  opacity: 0.14;
+  animation: float-a 14s ease-in-out infinite;
+}
+
+body::after {
+  content: "\2713  DONE";
+  bottom: 8%;
+  left: 5%;
+  font-size: 2.1rem;
+  color: var(--pink);
+  opacity: 0.15;
+  animation: float-b 12s ease-in-out infinite;
+}
+
+.app-container::before {
+  content: "STUDY";
+  top: 12%;
+  right: 3%;
+  font-size: 2.1rem;
+  color: var(--violet);
+  opacity: 0.14;
+  animation: float-c 16s ease-in-out infinite;
+}
+
+.app-container::after {
+  content: "GROCERY";
+  bottom: 6%;
+  right: 2%;
+  font-size: 1.8rem;
+  color: var(--pink);
+  opacity: 0.13;
+  animation: float-d 15s ease-in-out infinite;
+}
+
+.app-header::before {
+  content: "WORK  \2022  OFFICE";
+  top: 20%;
+  left: 8%;
+  font-size: 1.5rem;
+  color: var(--lavender);
+  opacity: 0.15;
+  animation: float-b 13s ease-in-out infinite;
+}
+
+.app-header::after {
+  content: "MEETING";
+  top: 4%;
+  right: 10%;
+  font-size: 1.5rem;
+  color: var(--royal);
+  opacity: 0.13;
+  animation: float-a 17s ease-in-out infinite;
+}
+
+/* NOTE: .app-main::before (the blue "CODE → DEPLOY" floating word) has been
+   removed — it was the blue decorative element drifting up/down over the
+   Add Task box. All other floating words are unchanged. */
+
+.app-main::after {
+  content: "GYM";
+  top: 38%;
+  right: 3%;
+  font-size: 2.2rem;
+  color: var(--violet);
+  opacity: 0.14;
+  animation: float-d 14s ease-in-out infinite;
+}
+
+.task-form::before {
+  content: "PLAN  \2726  FOCUS";
+  top: -34px;
+  left: -6%;
+  font-size: 1.4rem;
+  color: var(--pink);
+  opacity: 0.13;
+  animation: float-a 15s ease-in-out infinite;
+}
+
+.task-form::after {
+  content: "+ TASK";
+  top: 20%;
+  right: -6%;
+  font-size: 1.6rem;
+  color: var(--royal);
+  opacity: 0.15;
+  animation: float-b 11s ease-in-out infinite;
+}
+
+.task-list::before {
+  content: "DEADLINE  \25CB  PRIORITY";
+  bottom: -28px;
+  left: -4%;
+  font-size: 1.4rem;
+  color: var(--violet);
+  opacity: 0.12;
+  animation: float-c 19s ease-in-out infinite;
+}
+
+.task-list::after {
+  content: "SCHEDULE";
+  bottom: 2%;
+  right: -4%;
+  font-size: 1.6rem;
+  color: var(--blue);
+  opacity: 0.13;
+  animation: float-d 16s ease-in-out infinite;
+}
+
+.subtitle::after {
+  content: "GOALS \2022 IDEAS \2022 NOTES";
+  top: 3%;
+  left: 44%;
+  font-size: 1rem;
+  color: var(--pink);
+  opacity: 0.13;
+  animation: float-e 12s ease-in-out infinite;
+}
+
+.empty-state::after {
+  content: "START  \25CB  FINISH  \2022  REVIEW";
+  bottom: 4%;
+  left: 40%;
+  font-size: 1.3rem;
+  color: var(--royal);
+  opacity: 0.13;
+  animation: float-f 15s ease-in-out infinite;
+}
+
+/* additional scattered words using html/#root pseudo-elements for more density */
+html::before {
+  content: "REMINDER";
+  position: fixed;
+  top: 30%;
+  left: 14%;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--lavender);
+  opacity: 0.12;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  animation: float-e 17s ease-in-out infinite;
+}
+
+html::after {
+  content: "EMAIL \2022 CALL \2022 SHOP";
+  position: fixed;
+  top: 62%;
+  right: 12%;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--blue);
+  opacity: 0.12;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  animation: float-f 18s ease-in-out infinite;
+}
+
+#root::before {
+  content: "MORNING \2022 TODAY \2022 TOMORROW";
+  position: fixed;
+  top: 78%;
+  left: 8%;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--violet);
+  opacity: 0.12;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  animation: float-a 20s ease-in-out infinite;
+}
+
+#root::after {
+  content: "BUILD \2022 CREATE \2022 LEARN \2022 TEST \2022 SUBMIT";
+  position: fixed;
+  bottom: -6px;
+  right: 6%;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--pink);
+  opacity: 0.11;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  animation: float-b 19s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+  body::before,
+  body::after,
+  .app-container::before,
+  .app-container::after,
+  .app-header::after,
+  .app-main::after,
+  .task-form::before,
+  .task-form::after,
+  .task-list::before,
+  .task-list::after,
+  .subtitle::after,
+  .empty-state::after,
+  html::before,
+  html::after,
+  #root::before,
+  #root::after {
+    display: none;
+  }
+
+  .app-header::before {
+    opacity: 0.08;
+    font-size: 1.1rem;
+  }
+}
+
+/* ================= HEADER / BRAND ================= */
+
+.app-header {
+  text-align: center;
+  margin-bottom: 44px;
+  position: relative;
+  z-index: 1;
+  animation: fade-in-down 0.6s var(--ease);
+}
+
+/* Visually rebrand the heading to "2DO" via CSS only.
+   Original text is kept in the DOM (font-size:0) for accessibility. */
+.app-header h1 {
+  font-size: 0;
+  line-height: 0;
+  margin: 0 0 12px;
+  position: relative;
+  display: inline-block;
+}
+
+.app-header h1::before {
+  content: "2DO";
+  display: block;
+  font-size: 4.1rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  background: linear-gradient(100deg, var(--blue) 0%, var(--royal) 28%, var(--violet) 58%, var(--pink) 90%, var(--violet) 100%);
+  background-size: 260% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 8px 28px rgba(139, 92, 246, 0.38)) drop-shadow(0 2px 6px rgba(236, 72, 153, 0.22));
+  animation: gradient-shift 6s ease-in-out infinite, logo-in 0.75s var(--ease-spring);
+  transition: transform 0.3s var(--ease-spring), filter 0.3s var(--ease);
+  cursor: default;
+}
+
+.app-header h1::after {
+  content: "2DO";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  font-size: 4.1rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+  opacity: 0.35;
+  transform: translate(1px, -1px);
+  pointer-events: none;
+}
+
+.app-header h1:hover::before {
+  transform: translateY(-2px) scale(1.015);
+  filter: drop-shadow(0 10px 32px rgba(139, 92, 246, 0.48)) drop-shadow(0 3px 8px rgba(236, 72, 153, 0.3));
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes logo-in {
+  from { opacity: 0; transform: translateY(-12px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Replace subtitle text visually with a new tagline, CSS-only */
+.subtitle {
+  font-size: 0;
+  line-height: 0;
+  margin: 0;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.subtitle::before {
+  content: "Organize your day. Get things done.";
+  display: block;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+  animation: fade-in-up 0.6s var(--ease);
+}
+
+/* ================= FORM (premium panel) ================= */
+
+.task-form {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset,
+    0 0 60px -20px rgba(139, 92, 246, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: box-shadow 0.3s var(--ease);
+}
+
+/* gradient border sliver on top */
+.task-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blue), var(--violet), var(--pink));
+  opacity: 0.95;
+  z-index: 2;
+}
+
+/* soft inner glow blob, purely decorative, sits above the floating-word layer */
+.task-form::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  top: -130px;
+  right: -90px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.16), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.task-form:hover {
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px rgba(255, 255, 255, 0.45) inset,
+    0 0 76px -18px rgba(236, 72, 153, 0.28);
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+  min-width: 140px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.form-group input {
+  padding: 13px 15px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.85);
+  outline: none;
+  transition: border-color 0.22s var(--ease), box-shadow 0.22s var(--ease),
+    transform 0.22s var(--ease), background-color 0.22s var(--ease);
+}
+
+.form-group input::placeholder {
+  color: var(--text-faint);
+}
+
+.form-group input:hover {
+  border-color: var(--border-strong);
+  background: #ffffff;
+}
+
+.form-group input:focus {
+  border-color: var(--violet);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.16), 0 10px 24px -8px rgba(236, 72, 153, 0.22);
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: linear-gradient(115deg, var(--blue), var(--royal) 40%, var(--violet) 72%, var(--pink));
+  background-size: 200% 200%;
+  color: #fff;
+  border: none;
+  padding: 15px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: var(--shadow-glow);
+  transition: transform 0.2s var(--ease-spring), box-shadow 0.2s var(--ease),
+    background-position 0.5s var(--ease);
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.015);
+  background-position: 100% 30%;
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.22), 0 18px 38px -8px rgba(236, 72, 153, 0.48);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 6px 16px -6px rgba(99, 102, 241, 0.45);
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid rgba(139, 92, 246, 0.4);
+  outline-offset: 2px;
+}
+
+/* ================= TASK LIST (premium panel) ================= */
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.25) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md), 0 0 40px -16px rgba(99, 102, 241, 0.2);
+}
+
+.task-item {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.65) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.28s var(--ease-spring), box-shadow 0.28s var(--ease),
+    border-color 0.28s var(--ease), opacity 0.3s var(--ease), background 0.28s var(--ease);
+  animation: fade-in-up 0.4s var(--ease);
+}
+
+.task-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--blue), var(--violet), var(--pink));
+  transition: background 0.25s var(--ease), width 0.25s var(--ease);
+}
+
+.task-item:hover {
+  transform: translateY(-4px) scale(1.008);
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(139, 92, 246, 0.14), 0 0 26px -8px rgba(236, 72, 153, 0.3);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.task-item:hover::before {
+  width: 4px;
+}
+
+.task-item.completed {
+  background: linear-gradient(180deg, rgba(34, 192, 138, 0.08) 0%, rgba(255, 255, 255, 0.6) 100%);
+  opacity: 0.72;
+}
+
+.task-item.completed::before {
+  background: linear-gradient(180deg, var(--success), #17a074);
+}
+
+.task-item.completed:hover {
+  opacity: 0.9;
+}
+
+.task-checkbox-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.task-checkbox-label input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 23px;
+  height: 23px;
+  margin: 0;
+  border: 2px solid var(--border-strong);
+  border-radius: 7px;
+  cursor: pointer;
+  position: relative;
+  background: #ffffff;
+  transition: border-color 0.2s var(--ease), background 0.25s var(--ease),
+    transform 0.15s var(--ease-spring), box-shadow 0.25s var(--ease);
+}
+
+.task-checkbox-label input[type="checkbox"]:hover {
+  border-color: var(--violet);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+}
+
+.task-checkbox-label input[type="checkbox"]:active {
+  transform: scale(0.88);
+}
+
+.task-checkbox-label input[type="checkbox"]:checked {
+  background: linear-gradient(135deg, var(--royal), var(--violet) 55%, var(--pink));
+  border-color: var(--violet);
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.45);
+  animation: check-pop 0.35s var(--ease-spring);
+}
+
+.task-checkbox-label input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.task-checkbox-label input[type="checkbox"]:focus-visible {
+  outline: 3px solid rgba(139, 92, 246, 0.35);
+  outline-offset: 2px;
+}
+
+@keyframes check-pop {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.task-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-name {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  word-break: break-word;
+  transition: color 0.25s var(--ease);
+}
+
+.task-item.completed .task-name {
+  text-decoration: line-through;
+  text-decoration-color: var(--text-faint);
+  text-decoration-thickness: 1.5px;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.task-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.task-meta span:not(.dot) {
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-muted);
+}
+
+.dot {
+  display: none;
+}
+
+.btn-delete {
+  background: var(--danger-bg);
+  border: 1px solid rgba(239, 74, 114, 0.22);
+  color: var(--danger);
+  padding: 9px 15px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease),
+    transform 0.15s var(--ease-spring), color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.btn-delete:hover {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 22px -6px rgba(239, 74, 114, 0.45);
+}
+
+.btn-delete:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.btn-delete:focus-visible {
+  outline: 3px solid rgba(239, 74, 114, 0.35);
+  outline-offset: 2px;
+}
+
+/* ================= EMPTY STATE ================= */
+
+.empty-state {
+  text-align: center;
+  padding: 58px 24px;
+  color: var(--text-muted);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.5) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  animation: fade-in-up 0.4s var(--ease);
+}
+
+.empty-state::before {
+  content: "\2726";
+  display: block;
+  font-size: 1.7rem;
+  background: linear-gradient(100deg, var(--blue), var(--violet), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 10px;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 40px 14px 64px;
+  }
+
+  .app-header h1::before,
+  .app-header h1::after {
+    font-size: 2.9rem;
+  }
+
+  .task-form {
+    padding: 22px;
+  }
+
+  .task-list {
+    padding: 10px;
+  }
+
+  .task-item {
+    flex-wrap: wrap;
+    padding: 16px;
+  }
+
+  .task-info {
+    order: 2;
+    flex-basis: calc(100% - 40px);
+  }
+
+  .btn-delete {
+    order: 3;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-container {
+    max-width: 720px;
+    padding-top: 68px;
+  }
+
+  .task-form {
+    padding: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-container {
+    max-width: 760px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

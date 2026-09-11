@@ -1,0 +1,15 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "id": 1,
+  "taskName": "Learn Spring",
+  "date": "11-09-2026",
+  "time": "10:00 PM",
+  "completed": false
+}
