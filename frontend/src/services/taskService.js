@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/tasks";
+const BASE_URL = "https://todo-app-backend-ck6q.onrender.com/tasks";
 
 // GET /tasks - fetch all tasks
 export async function getTasks() {
